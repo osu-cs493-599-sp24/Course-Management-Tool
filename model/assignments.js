@@ -13,10 +13,6 @@ const Assignments = sequelize.define("Assignment", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  path: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   dueDate: {
     type: DataTypes.DATE,
     allowNull: false,

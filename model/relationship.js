@@ -4,10 +4,37 @@ const { User } = require("./users");
 const { Assignments } = require("./assignments");
 const { Courses } = require("./courses");
 
+Assignments.hasMany(Submissions, {
+  foreignKey: {
+    name: "assignmentId",
+    allowNull: false,
+  },
+});
 
+User.hasMany(Submissions, {
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+});
 
-Assignments.hasMany(Submissions, { foreignKey: { allowNull: false } });
-User.hasMany(Submissions, { foreignKey: { allowNull: false } });
-User.hasMany(Enrollments, { foreignKey: { allowNull: false } });
-Courses.hasMany(Assignments, { foreignKey: { allowNull: false } });
-Courses.hasMany(Enrollments, { foreignKey: { allowNull: false } });
+User.hasMany(Enrollments, {
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+});
+
+Courses.hasMany(Assignments, {
+  foreignKey: {
+    name: "courseId",
+    allowNull: false,
+  },
+});
+
+Courses.hasMany(Enrollments, {
+  foreignKey: {
+    name: "courseId",
+    allowNull: false,
+  },
+});
