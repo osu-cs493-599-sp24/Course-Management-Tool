@@ -6,6 +6,8 @@ const sequelize = require("./lib/sequelize");
 const app = express();
 const port = process.env.PORT || 8000;
 
+
+
 /*
  * Morgan is a popular request logger.
  */
@@ -38,10 +40,11 @@ app.use("*", function (err, req, res, next) {
   });
 });
 
-sequelize.sync().then(function () {
+sequelize.sync({ force: true }).then(function () {
   app.listen(port, function () {
     console.log("== Server is running on port", port);
   });
 });
+
 
 
