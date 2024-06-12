@@ -35,7 +35,7 @@ router.post(
       submissionTime: formattedDate,
       filePath: req.file.path,
       grade: req.body.grade,
-      assignmentId: req.params.assignmentid,
+      assignmentId: parseInt(req.params.assignmentid),
       userId: inputUserID,
     };
     console.log("== Uploaded body: ", input);

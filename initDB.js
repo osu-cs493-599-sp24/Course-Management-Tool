@@ -11,8 +11,8 @@ const sequelize = require("./lib/sequelize");
 
 // Correct usage of sequelize.sync()
 sequelize.sync().then(async function () {
-//   await Courses.bulkCreate(coursesData);
-//   await User.bulkCreate(usersData);
+  await Courses.bulkCreate(coursesData);
+  await User.bulkCreate(usersData);
   await Assignments.bulkCreate(assignmentData);
 }).catch(error => {
   console.error('Error during database synchronization:', error);

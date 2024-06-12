@@ -40,7 +40,7 @@ app.use("*", function (err, req, res, next) {
   });
 });
 
-sequelize.sync({ force: true }).then(function () {
+sequelize.sync().then(function () {
   app.listen(port, function () {
     console.log("== Server is running on port", port);
   });
