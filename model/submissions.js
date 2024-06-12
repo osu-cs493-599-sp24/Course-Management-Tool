@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../lib/sequelize");
-const { Users } = require("./users");
+const { User } = require("./users");
 const { Assignments } = require("./assignments");
+
 const Submissions = sequelize.define("Submission", {
   submissionID: {
     type: DataTypes.INTEGER,
@@ -10,7 +11,7 @@ const Submissions = sequelize.define("Submission", {
     allowNull: false,
   },
   submissionTime: {
-    type: DataTypes.DATE, // Stores both date and time
+    type: DataTypes.STRING, // Stores both date and time
     allowNull: false,
   },
   filePath: {
@@ -19,20 +20,13 @@ const Submissions = sequelize.define("Submission", {
   },
   grade: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
 });
 
-// Relationships
-Submissions.belongsTo(Assignments, {
-  foreignKey: "assignmentID",
-  allowNull: false,
-});
-Enrollments.belongsTo(Users, {
-  foreignKey: "userID",
-  as: "user",
-  allowNull: false,
-});
+
+
+
 
 exports.Submissions = Submissions;
 exports.submissionFields = [

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../lib/sequelize");
 const { Courses } = require("./courses");
-
+const { Submissions } = require("./submissions");
 const Assignments = sequelize.define("Assignment", {
   assignmentID: {
     type: DataTypes.INTEGER,
@@ -9,16 +9,11 @@ const Assignments = sequelize.define("Assignment", {
     autoIncrement: true,
     allowNull: false,
   },
-  courseID: {
-    // Foreign key pointing to Courses
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Courses,
-      key: "courseID",
-    },
-  },
   title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  path: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -29,11 +24,14 @@ const Assignments = sequelize.define("Assignment", {
 });
 
 // Relationship
-Assignments.belongsTo(Courses, {
-  foreignKey: "courseID",
-  as: "course",
-  allowNull: false,
-});
+// Assignments.hasMany(Submissions, { foreignKey: { allowNull: false } });
 
 exports.Assignments = Assignments;
-exports.assignmentFields = ["assignmentID", "title", "dueDate", "courseID"];
+
+exports.assignmentFields = [
+  "assignmentID",
+  "title",
+  "dueDate",
+  "path",
+  "courseID",
+];
