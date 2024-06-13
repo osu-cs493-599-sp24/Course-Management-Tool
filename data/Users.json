@@ -1,34 +1,66 @@
 [
     {
-        "firstName": "William",
-        "lastName": "Bob",
-        "username": "williambob",
+        "firstName": "Jessica",
+        "lastName": "Tate",
+        "username": "jessicatate",
         "role": "Student",
-        "email": "bob@gmail.com",
-        "password": "password"
+        "email": "jessica.tate@example.com",
+        "password": "securePass123"
     },
     {
-        "firstName": "Joe",
-        "lastName": "Bob",
-        "username": "joebob",
+        "firstName": "Marcus",
+        "lastName": "Brown",
+        "username": "marcusbrown",
         "role": "Student",
-        "email": "joe@gmail.com",
-        "password": "password"
+        "email": "marcus.brown@example.com",
+        "password": "verySecure456"
     },
     {
-        "firstName": "Jane",
-        "lastName": "Doe",
-        "username": "janedoe",
-        "role": "Student",
-        "email": "jane@gmail.com",
-        "password": "password"
+        "firstName": "Linda",
+        "lastName": "Green",
+        "username": "lindagreen",
+        "role": "Instructor",
+        "email": "linda.green@example.com",
+        "password": "password789"
     },
     {
-        "firstName": "Lucy",
+        "firstName": "Tom",
         "lastName": "Smith",
-        "username": "lucysmith",
+        "username": "tomsmith",
+        "role": "Administrator",
+        "email": "tom.smith@example.com",
+        "password": "adminPassword234"
+    },
+    {
+        "firstName": "Sara",
+        "lastName": "Johnson",
+        "username": "sarajohnson",
         "role": "Student",
-        "email": "lucy@gmail.com",
-        "password": "password"
+        "email": "sara.johnson@example.com",
+        "password": "saraPass567"
+    },
+    {
+        "firstName": "Derek",
+        "lastName": "Lee",
+        "username": "derekleee",
+        "role": "Student",
+        "email": "derek.lee@example.com",
+        "password": "derek7890"
+    },
+    {
+        "firstName": "Chloe",
+        "lastName": "Davis",
+        "username": "chloedavis",
+        "role": "Student",
+        "email": "chloe.davis@example.com",
+        "password": "chloeSecure123"
+    },
+    {
+        "firstName": "Ethan",
+        "lastName": "White",
+        "username": "ethanwhite",
+        "role": "Student",
+        "email": "ethan.white@example.com",
+        "password": "ethanWhite456"
     }
 ]

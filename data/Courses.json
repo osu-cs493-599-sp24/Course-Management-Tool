@@ -1,26 +1,44 @@
 [
     {
-        "subjectCode": "MTH",
-        "courseNumber": 100,
-        "title": "Intro Math",
-        "instructor": "David Day"
+        "subjectCode": 3012,
+        "courseNumber": 10001,
+        "title": "Introduction to Biology",
+        "instructor": "Jane Smith"
     },
     {
-        "subjectCode": "MTH",
-        "courseNumber": 200,
-        "title": "Advanced Math",
-        "instructor": "David Day"
+        "subjectCode": 4078,
+        "courseNumber": 20201,
+        "title": "Advanced Mathematics",
+        "instructor": "Albert Chen"
     },
     {
-        "subjectCode": "BIO",
-        "courseNumber": 100,
-        "title": "Basic Bilogy",
-        "instructor": "Amy Price"
+        "subjectCode": 5099,
+        "courseNumber": 30391,
+        "title": "World History Overview",
+        "instructor": "Samuel Perez"
     },
     {
-        "subjectCode": "HTH",
-        "courseNumber": 100,
-        "title": "Health Principles",
-        "instructor": "Martin Bern"
+        "subjectCode": 6001,
+        "courseNumber": 40410,
+        "title": "Computer Science Fundamentals",
+        "instructor": "Lisa Ray"
+    },
+    {
+        "subjectCode": 7100,
+        "courseNumber": 50120,
+        "title": "Business Ethics 101",
+        "instructor": "Mohammed Khan"
+    },
+    {
+        "subjectCode": 8250,
+        "courseNumber": 60230,
+        "title": "Digital Marketing Essentials",
+        "instructor": "Susan Lee"
+    },
+    {
+        "subjectCode": 9405,
+        "courseNumber": 70340,
+        "title": "Modern Art Movements",
+        "instructor": "Oliver Queen"
     }
 ]

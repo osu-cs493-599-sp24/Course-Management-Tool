@@ -1,7 +1,72 @@
 [
     {
-        "title": "first assignment",
+        "title": "Intro to Biology Quiz 1",
+        "dueDate": "2024-08-30",
+        "courseId": 2
+    },
+    {
+        "title": "Intro to Biology Quiz 2",
+        "dueDate": "2024-09-20",
+        "courseId": 2
+    },
+    {
+        "title": "Advanced Math Homework Set 1",
+        "dueDate": "2024-09-10",
+        "courseId": 3
+    },
+    {
+        "title": "Advanced Math Homework Set 2",
+        "dueDate": "2024-10-10",
+        "courseId": 3
+    },
+    {
+        "title": "History Essay on World War II",
+        "dueDate": "2024-10-05",
+        "courseId": 4
+    },
+    {
+        "title": "History Presentation on The Cold War",
+        "dueDate": "2024-11-05",
+        "courseId": 4
+    },
+    {
+        "title": "Computer Science Midterm Project",
+        "dueDate": "2024-10-15",
+        "courseId": 5
+    },
+    {
+        "title": "Computer Science Final Project",
+        "dueDate": "2024-11-25",
+        "courseId": 5
+    },
+    {
+        "title": "Business Ethics Group Discussion",
+        "dueDate": "2024-11-01",
+        "courseId": 6
+    },
+    {
+        "title": "Business Ethics Final Paper",
         "dueDate": "2024-12-01",
-        "courseId": 1
+        "courseId": 6
+    },
+    {
+        "title": "Digital Marketing SEO Basics",
+        "dueDate": "2024-11-20",
+        "courseId": 7
+    },
+    {
+        "title": "Digital Marketing Social Media Campaign",
+        "dueDate": "2024-12-15",
+        "courseId": 7
+    },
+    {
+        "title": "Modern Art Early 20th Century Study",
+        "dueDate": "2024-11-10",
+        "courseId": 8
+    },
+    {
+        "title": "Modern Art Postmodernism Analysis",
+        "dueDate": "2024-12-10",
+        "courseId": 8
     }
 ]
