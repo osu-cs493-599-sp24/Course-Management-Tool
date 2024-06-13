@@ -1,8 +1,17 @@
 [
     {
+        "courseID": 1,
         "subjectCode": 2556,
         "courseNumber": 25561,
         "title": "number 1 class",
         "instructor": "David Day"
+    },
+    {
+        "courseID": 2,
+        "subjectCode": 2550,
+        "courseNumber": 25560,
+        "title": "number 2 class",
+        "instructor": "Robin Hess"
     }
+
 ]

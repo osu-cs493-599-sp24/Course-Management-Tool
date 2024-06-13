@@ -6,5 +6,13 @@
         "role": "Student",
         "email": "bob@gmail.com",
         "password": "password"
+    },
+    {
+        "firstName": "Will",
+        "lastName": "Bob",
+        "username": "bobwill",
+        "role": "Student",
+        "email": "bobwill@gmail.com",
+        "password": "password2"
     }
 ]
