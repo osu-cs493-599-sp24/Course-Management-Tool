@@ -22,10 +22,6 @@ const Courses = sequelize.define("Courses", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  instructor: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
 });
 
 exports.Courses = Courses;
