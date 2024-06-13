@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const path = require("path");
+const { ValidationError } = require('sequelize')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const courses = require('../data/Courses.json')
@@ -9,6 +10,20 @@ const { User } = require('../model/users')
 
 exports.router = router
 exports.courses = courses
+
+router.post('/', async function (req, res, next) {
+    try {
+        const course = await Courses.create(req.body, CoursesFields)
+        res.status(201).send({ id: course.courseID })
+    } catch(e) {
+        if (e instanceof ValidationError) {
+            res.status(400).send({ error: e.message })
+        } else {
+            next(e)
+        }
+        
+    }
+})
 
 router.get('/', async function (req, res, next) {
     let page = parseInt(req.query.page) || 1;
@@ -180,3 +195,22 @@ router.get('/:courseId/assignments', async function (req, res, next) {
     }
   });
   module.exports = router;
+
+  // endpoint to update a course
+  router.patch('/:courseID', async function (req, res, next) {
+    const courseId = req.params.courseID
+    try {
+    const result = await Courses.update(req.body, {
+        where: { courseID: courseId },
+        fields: CoursesFields
+    })
+    if (result[0] > 0) {
+        res.status(204).send()
+    } else {
+        next()
+    }
+    } catch (e) {
+    next(e)
+    }
+    
+})

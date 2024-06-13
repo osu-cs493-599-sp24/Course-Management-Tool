@@ -22,8 +22,8 @@ const Courses = sequelize.define("Courses", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  instructor: {
-    type: DataTypes.STRING,
+  instructorId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 });
@@ -39,5 +39,5 @@ exports.CoursesFields = [
   "subjectCode",
   "courseNumber",
   "title",
-  "instructor",
+  "instructorId",
 ];
