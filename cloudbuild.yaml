@@ -13,8 +13,18 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs']
 - name: 'gcr.io/cloud-builders/kubectl'
+  env:
+  - name: CLOUDSDK_COMPUTE_ZONE
+    value: us-central1-a
+  - name: CLOUDSDK_CONTAINER_CLUSTER
+    value: my-cluster
   args: ['apply', '-f', 'mysql-deployment.yml']
 - name: 'gcr.io/cloud-builders/kubectl'
+  env:
+  - name: CLOUDSDK_COMPUTE_ZONE
+    value: us-central1-a
+  - name: CLOUDSDK_CONTAINER_CLUSTER
+    value: my-cluster
   args: ['apply', '-f', 'nodejs-deployment.yml']
 images:
 - 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs'
