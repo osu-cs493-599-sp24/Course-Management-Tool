@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-server
+    networks:
+      - mysql-net
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "finalproject"
+      MYSQL_USER: "finalproject"
+      MYSQL_PASSWORD: "hunter2"
+  
+  nodejs:
+    build: .
+    container_name: nodejs-app
+    networks:
+      - mysql-net
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: finalproject
+      DB_PASSWORD: hunter2
+      DB_NAME: finalproject
+
+networks:
+  mysql-net:
+    driver: bridge
