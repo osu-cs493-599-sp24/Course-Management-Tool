@@ -18,7 +18,8 @@ Assignments.hasMany(Submissions, {
     }
   });
   
-  User.hasMany(Enrollments, {
+  User.belongsToMany(Courses, {
+    through: 'Enrollments',
     foreignKey: {
       name: 'userId',
       allowNull: false
@@ -32,10 +33,13 @@ Assignments.hasMany(Submissions, {
     }
   });
   
-  Courses.hasMany(Enrollments, {
+  Courses.belongsToMany(User, {
+    through: 'Enrollments',
     foreignKey: {
       name: 'courseId',
       allowNull: false
     }
   });
+
+
   

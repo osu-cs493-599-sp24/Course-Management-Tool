@@ -8,11 +8,27 @@
         "password": "password"
     },
     {
-        "firstName": "Will",
+        "firstName": "Joe",
         "lastName": "Bob",
-        "username": "bobwill",
+        "username": "joebob",
         "role": "Student",
-        "email": "bobwill@gmail.com",
-        "password": "password2"
+        "email": "joe@gmail.com",
+        "password": "password"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "username": "janedoe",
+        "role": "Student",
+        "email": "jane@gmail.com",
+        "password": "password"
+    },
+    {
+        "firstName": "Lucy",
+        "lastName": "Smith",
+        "username": "lucysmith",
+        "role": "Student",
+        "email": "lucy@gmail.com",
+        "password": "password"
     }
 ]

@@ -1,17 +1,57 @@
 [
     {
-        "courseID": 1,
-        "subjectCode": 2556,
-        "courseNumber": 25561,
-        "title": "number 1 class",
+        "subjectCode": "MTH",
+        "courseNumber": 100,
+        "title": "Intro Math",
         "instructor": "David Day"
     },
     {
-        "courseID": 2,
-        "subjectCode": 2550,
-        "courseNumber": 25560,
-        "title": "number 2 class",
-        "instructor": "Robin Hess"
+        "subjectCode": "MTH",
+        "courseNumber": 200,
+        "title": "Advanced Math",
+        "instructor": "David Day"
+    },
+    {
+        "subjectCode": "BIO",
+        "courseNumber": 100,
+        "title": "Basic Bilogy",
+        "instructor": "Amy Price"
+    },
+    {
+        "subjectCode": "HTH",
+        "courseNumber": 100,
+        "title": "Health Principles",
+        "instructor": "Martin Bern"
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 100,
+        "title": "Business Ethics 101",
+        "instructor": "Mohammed Khan"
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 110,
+        "title": "Digital Marketing Essentials",
+        "instructor": "Susan Lee"
+    },
+    {
+        "subjectCode": "ART",
+        "courseNumber": 120,
+        "title": "Modern Art Movements",
+        "instructor": "Oliver Queen"
+    },
+    {
+        "subjectCode": "HST",
+        "courseNumber": 100,
+        "title": "World History Overview",
+        "instructor": "Samuel Perez"
+    },
+    {
+        "subjectCode": "CS",
+        "courseNumber": 100,
+        "title": "Computer Science Fundamentals",
+        "instructor": "Lisa Ray"
     }
 
 ]
