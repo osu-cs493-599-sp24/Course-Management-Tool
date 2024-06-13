@@ -5,6 +5,8 @@ const path = require("path");
 const crypto = require("crypto");
 const router = Router();
 const { Submissions, submissionFields } = require("../model/submissions");
+const { off } = require("process");
+const express = require("express");
 // Setup for file upload
 const upload = multer({
   storage: multer.diskStorage({
@@ -22,6 +24,42 @@ const upload = multer({
   }),
 });
 
+router.use("/submissions", express.static(path.join(__dirname, "submissions")));
+
+router.get("/:assignmentid/submissions", async function (req, res, next) {
+  let page = parseInt(req.query.page) || 1;
+  page = page < 1 ? 1 : page;
+  const numPerPage = 5;
+  const offset = (page - 1) * numPerPage;
+
+  try {
+    const result = await Submissions.findAndCountAll({
+      limit: numPerPage,
+      offset: offset,
+    });
+    const lastPage = Math.ceil(result.count / numPerPage);
+    const links = {};
+    if (page < lastPage) {
+      links.nextPage = `/submissions?page${page + 1}`;
+      links.lastPage = `/submissions?page=${lastPage}`;
+    }
+    if (page > 1) {
+      links.nextPage = `/submissions?page${page + 1}`;
+      links.lastPage = `/submissions?page=$1`;
+    }
+
+    res.status(200).send({
+      submissions: result.rows,
+      pageNumber: page,
+      tottalPages: lastPage,
+      pageSize: numPerPage,
+      totalCount: result.count,
+      links: links,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
 router.post(
   "/:assignmentid/submission",
   upload.single("file"),
@@ -31,9 +69,10 @@ router.post(
       .toString()
       .padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}`;
     const inputUserID = 1; // Placeholder for actual user ID from authentication
+    const downloadPath = `/assignments/submissions/${req.file.filename}`;
     const input = {
       submissionTime: formattedDate,
-      filePath: req.file.path,
+      filePath: downloadPath,
       grade: req.body.grade,
       assignmentId: parseInt(req.params.assignmentid),
       userId: inputUserID,
