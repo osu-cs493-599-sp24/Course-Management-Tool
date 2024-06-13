@@ -1,34 +1,66 @@
 [
     {
-        "firstName": "William",
-        "lastName": "Bob",
-        "username": "williambob",
-        "role": "Student",
-        "email": "bob@gmail.com",
-        "password": "password"
+        "firstName": "David",
+        "lastName": "Day",
+        "username": "davidd",
+        "role": "Instructor",
+        "email": "david.day@email.com",
+        "password": "securepassword123"
     },
     {
-        "firstName": "Joe",
-        "lastName": "Bob",
-        "username": "joebob",
-        "role": "Student",
-        "email": "joe@gmail.com",
-        "password": "password"
+        "firstName": "Amy",
+        "lastName": "Price",
+        "username": "amyprice",
+        "role": "Instructor",
+        "email": "amy.price@email.com",
+        "password": "securepassword123"
     },
     {
-        "firstName": "Jane",
-        "lastName": "Doe",
-        "username": "janedoe",
-        "role": "Student",
-        "email": "jane@gmail.com",
-        "password": "password"
+        "firstName": "Martin",
+        "lastName": "Bern",
+        "username": "martinbern",
+        "role": "Instructor",
+        "email": "martin.bern@email.com",
+        "password": "securepassword123"
     },
     {
-        "firstName": "Lucy",
-        "lastName": "Smith",
-        "username": "lucysmith",
-        "role": "Student",
-        "email": "lucy@gmail.com",
-        "password": "password"
+        "firstName": "Mohammed",
+        "lastName": "Khan",
+        "username": "mohammedk",
+        "role": "Instructor",
+        "email": "mohammed.khan@email.com",
+        "password": "securepassword123"
+    },
+    {
+        "firstName": "Susan",
+        "lastName": "Lee",
+        "username": "susanlee",
+        "role": "Instructor",
+        "email": "susan.lee@email.com",
+        "password": "securepassword123"
+    },
+    {
+        "firstName": "Oliver",
+        "lastName": "Queen",
+        "username": "oliverq",
+        "role": "Instructor",
+        "email": "oliver.queen@email.com",
+        "password": "securepassword123"
+    },
+    {
+        "firstName": "Samuel",
+        "lastName": "Perez",
+        "username": "samuelp",
+        "role": "Instructor",
+        "email": "samuel.perez@email.com",
+        "password": "securepassword123"
+    },
+    {
+        "firstName": "Lisa",
+        "lastName": "Ray",
+        "username": "lisar",
+        "role": "Instructor",
+        "email": "lisa.ray@email.com",
+        "password": "securepassword123"
     }
 ]

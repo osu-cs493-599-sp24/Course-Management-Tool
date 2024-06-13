@@ -41,8 +41,7 @@ Courses.belongsToMany(User, {
   },
 });
 
-Courses.hasOne(User, {
-  through: "User",
+User.hasMany(Courses, {
   foreignKey: {
     name: "instructorId",
     allowNull: false,
