@@ -22,5 +22,35 @@
         "courseNumber": 100,
         "title": "Health Principles",
         "instructor": "Martin Bern"
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 100,
+        "title": "Business Ethics 101",
+        "instructor": "Mohammed Khan"
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 110,
+        "title": "Digital Marketing Essentials",
+        "instructor": "Susan Lee"
+    },
+    {
+        "subjectCode": "ART",
+        "courseNumber": 120,
+        "title": "Modern Art Movements",
+        "instructor": "Oliver Queen"
+    },
+    {
+        "subjectCode": "HST",
+        "courseNumber": 100,
+        "title": "World History Overview",
+        "instructor": "Samuel Perez"
+    },
+    {
+        "subjectCode": "CS",
+        "courseNumber": 100,
+        "title": "Computer Science Fundamentals",
+        "instructor": "Lisa Ray"
     }
 ]

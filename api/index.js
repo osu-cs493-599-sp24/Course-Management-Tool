@@ -10,7 +10,7 @@ require("../model/relationship");
 
 // router import
 const assignmentsRouter = require("./assignments");
-const coursesRouter = require("./courses").router;
+const coursesRouter = require("./courses");
 
 const router = Router();
 
