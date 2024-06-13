@@ -1,7 +1,14 @@
 [
     {
+        "assignmentID": 1,
         "title": "first assignment",
         "dueDate": "2024-12-01",
         "courseId": 1
-    }
+    },
+    {
+        "assignmentID": 2,
+        "title": "Second Assignment",
+        "dueDate": "2024-12-01 00:00:00",
+        "courseId": 2
+      }
 ]
