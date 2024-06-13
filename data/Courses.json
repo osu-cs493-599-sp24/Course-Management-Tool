@@ -1,8 +1,26 @@
 [
     {
-        "subjectCode": 2556,
-        "courseNumber": 25561,
-        "title": "number 1 class",
+        "subjectCode": "MTH",
+        "courseNumber": 100,
+        "title": "Intro Math",
         "instructor": "David Day"
+    },
+    {
+        "subjectCode": "MTH",
+        "courseNumber": 200,
+        "title": "Advanced Math",
+        "instructor": "David Day"
+    },
+    {
+        "subjectCode": "BIO",
+        "courseNumber": 100,
+        "title": "Basic Bilogy",
+        "instructor": "Amy Price"
+    },
+    {
+        "subjectCode": "HTH",
+        "courseNumber": 100,
+        "title": "Health Principles",
+        "instructor": "Martin Bern"
     }
 ]

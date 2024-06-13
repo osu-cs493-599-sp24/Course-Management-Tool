@@ -6,5 +6,29 @@
         "role": "Student",
         "email": "bob@gmail.com",
         "password": "password"
+    },
+    {
+        "firstName": "Joe",
+        "lastName": "Bob",
+        "username": "joebob",
+        "role": "Student",
+        "email": "joe@gmail.com",
+        "password": "password"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "username": "janedoe",
+        "role": "Student",
+        "email": "jane@gmail.com",
+        "password": "password"
+    },
+    {
+        "firstName": "Lucy",
+        "lastName": "Smith",
+        "username": "lucysmith",
+        "role": "Student",
+        "email": "lucy@gmail.com",
+        "password": "password"
     }
 ]
