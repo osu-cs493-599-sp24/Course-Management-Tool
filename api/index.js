@@ -7,11 +7,15 @@ const { User } = require("../model/users");
 const { Assignments } = require("../model/assignments");
 const { Courses } = require("../model/courses");
 require("../model/relationship");
+
 // router import
 const assignmentsRouter = require("./assignments");
+const usersRouter = require("./users");
 
 const router = Router();
 
 router.use("/assignments", assignmentsRouter);
+router.use("/users", usersRouter);
+
 
 module.exports = router;
