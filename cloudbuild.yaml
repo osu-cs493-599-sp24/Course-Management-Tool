@@ -6,9 +6,9 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs']
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'kubernetes/mysql-deployment.yml']
+  args: ['apply', '-f', 'mysql-deployment.yml']
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'kubernetes/nodejs-deployment.yml']
+  args: ['apply', '-f', 'nodejs-deployment.yml']
 images:
 - 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs'
 options:
