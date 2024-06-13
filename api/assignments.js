@@ -51,7 +51,7 @@ router.get("/:assignmentid/submissions", async function (req, res, next) {
     res.status(200).send({
       submissions: result.rows,
       pageNumber: page,
-      tottalPages: lastPage,
+      totalPages: lastPage,
       pageSize: numPerPage,
       totalCount: result.count,
       links: links,

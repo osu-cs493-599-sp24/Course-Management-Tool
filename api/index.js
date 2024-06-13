@@ -9,9 +9,10 @@ const { Courses } = require("../model/courses");
 require("../model/relationship");
 // router import
 const assignmentsRouter = require("./assignments");
+const courseRouter = require("./courses")
 
 const router = Router();
 
 router.use("/assignments", assignmentsRouter);
-
+router.use("/courses", courseRouter)
 module.exports = router;
