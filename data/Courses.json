@@ -3,54 +3,54 @@
         "subjectCode": "MTH",
         "courseNumber": 100,
         "title": "Intro Math",
-        "instructor": "David Day"
+        "instructorId": 1
     },
     {
         "subjectCode": "MTH",
         "courseNumber": 200,
         "title": "Advanced Math",
-        "instructor": "David Day"
+        "instructorId": 1
     },
     {
         "subjectCode": "BIO",
         "courseNumber": 100,
         "title": "Basic Bilogy",
-        "instructor": "Amy Price"
+        "instructorId": 2
     },
     {
         "subjectCode": "HTH",
         "courseNumber": 100,
         "title": "Health Principles",
-        "instructor": "Martin Bern"
+        "instructorId": 3
     },
     {
         "subjectCode": "BSN",
         "courseNumber": 100,
         "title": "Business Ethics 101",
-        "instructor": "Mohammed Khan"
+        "instructorId": 4
     },
     {
         "subjectCode": "BSN",
         "courseNumber": 110,
         "title": "Digital Marketing Essentials",
-        "instructor": "Susan Lee"
+        "instructorId": 5
     },
     {
         "subjectCode": "ART",
         "courseNumber": 120,
         "title": "Modern Art Movements",
-        "instructor": "Oliver Queen"
+        "instructorId": 6
     },
     {
         "subjectCode": "HST",
         "courseNumber": 100,
         "title": "World History Overview",
-        "instructor": "Samuel Perez"
+        "instructorId": 6
     },
     {
         "subjectCode": "CS",
         "courseNumber": 100,
         "title": "Computer Science Fundamentals",
-        "instructor": "Lisa Ray"
+        "instructorId": 8
     }
 ]
