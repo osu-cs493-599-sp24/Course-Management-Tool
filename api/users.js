@@ -5,13 +5,13 @@ const { Enrollments } = require('../model/enrollments');
 // const { Enrollments } = require('../model/relationship'); // Import the relationships
 const auth = require('../lib/auth');  // Import the auth module
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const router = Router();
 /*
  * Route to list all of a user's businesses.
  */
 
-router.post("/", auth.requireAuthentication, auth.requireAdmin, async (req, res, next) => {
+router.post('/', auth.requireAuthentication, async (req, res, next) => {
   try {
     const { firstName, lastName, username, role, email, password } = req.body;
 
@@ -19,52 +19,59 @@ router.post("/", auth.requireAuthentication, auth.requireAdmin, async (req, res,
     if (!firstName || !lastName || !username || !role || !email || !password) {
       return res.status(400).json({ error: "All fields (firstName, lastName, username, role, email, password) are required." });
     }
+    console.log(":req.role",req.role);
+    console.log(typeof(role));
 
     // Check if the user is trying to create an 'admin' or 'instructor' role
-    if (['admin', 'instructor'].includes(role) && req.role !== 'admin') {
-      return res.status(403).json({ error: "Admin permissions required to create 'admin' or 'instructor' roles." });
+    if (req.role == 'instructor' || req.role == 'admin') {
+      console.log("Creating the new user...");
+          // Hash the password
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+      const newUser = await User.create({
+        firstName,
+        lastName,
+        username,
+        role,
+        email,
+        password: hashedPassword, // Store the hashed password
+      });
+      res.status(201).json({ id: newUser.userID, message: "User created successfully!" });
     }
-
-    // Create user in the database
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      username,
-      role,
-      email,
-      password, // The model will handle hashing
-    });
-
-    res.status(201).json({ id: newUser.userID, message: "User created successfully!" });
+    else {
+      if (req.role == "student")
+      {
+        console.log("can't create the user");
+      return res.status(403).json({ error: "Admin permissions required to create 'admin' or 'instructor' roles." });
+      }
+    }
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// POST /login - User login
+
 router.post('/login', async function (req, res) {
   try {
     const { email, password } = req.body;
-
-    // Log the incoming request data for debugging
-    console.log("Login attempt:", { email, password });
-
-    // Find user by email
+    console.log("req.body::", req.body);
     const user = await User.findByEmail(email);
+    console.log("user", user);
 
-    // Check if user exists and password is correct
     if (!user) {
-      console.log("User not found");
+      return res.status(401).json({ error: 'no such user' });
+    }
+    console.log("password, user.password", user.password, password);
+    //Verify password
+    const isMatch = bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      console.log("match, user.password", user.password);
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    if (!user.verifyPassword(password)) {
-      console.log("Password verification failed");
-      return res.status(401).json({ error: 'Invalid email or password' });
-    }
-
-    // Generate authentication token
+    // Generate token
     const token = auth.generateAuthToken(user.userID, user.role);
     res.json({ token });
   } catch (error) {
@@ -72,6 +79,7 @@ router.post('/login', async function (req, res) {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 // router.get("/:id", async function (req, res, next) {
 //   const userId = parseInt(req.params.id); // Extract user ID from request parameters
