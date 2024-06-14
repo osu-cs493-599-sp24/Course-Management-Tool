@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-
+const cors = require('cors');
 const api = require("./api");
 const sequelize = require("./lib/sequelize");
 const app = express();
@@ -12,6 +12,7 @@ const port = process.env.PORT || 8000;
  * Morgan is a popular request logger.
  */
 app.use(morgan("dev"));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static("public"));
