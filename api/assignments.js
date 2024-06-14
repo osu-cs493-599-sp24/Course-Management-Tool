@@ -172,7 +172,7 @@ router.get("/:assignmentId/submissions", async function (req, res, next) {
 
 //assignments/{id}/submissions - create a new submission
 router.post(
-  "/:assignmentid/submission",
+  "/:assignmentid/submissions",
   upload.single("file"),
   async function (req, res, next) {
     const now = new Date();
