@@ -104,7 +104,9 @@ spec:
           value: "finalproject"
         ports:
         - containerPort: 8000
----
+EOF
+
+cat <<EOF > nodejs-service.yml
 apiVersion: v1
 kind: Service
 metadata:
@@ -121,6 +123,7 @@ EOF
 # Apply the Kubernetes configurations
 kubectl apply -f mysql-deployment.yml
 kubectl apply -f nodejs-deployment.yml
+kubectl apply -f nodejs-service.yml
 
 # Wait for the Node.js service to get an external IP
 echo "Waiting for the Node.js service to get an external IP..."
@@ -137,4 +140,19 @@ done
 echo "Node.js service is running at http://$NODEJS_IP/"
 
 # Clean up
-rm mysql-deployment.yml nodejs-deployment.yml
+# rm mysql-deployment.yml nodejs-deployment.yml nodejs-service.yml
+
+# Verify the Node.js service
+echo "Verifying the Node.js service..."
+curl -I http://$NODEJS_IP/
+
+# Get the pod name
+NODEJS_POD=$(kubectl get pods -l app=nodejs -o jsonpath='{.items[0].metadata.name}')
+
+# Print the logs of the Node.js pod
+echo "Logs of the Node.js pod:"
+kubectl logs $NODEJS_POD
+
+# Describe the Node.js pod
+echo "Description of the Node.js pod:"
+kubectl describe pod $NODEJS_POD

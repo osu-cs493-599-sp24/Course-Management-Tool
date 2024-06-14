@@ -135,7 +135,7 @@ router.get("/:courseId/students", async function (req, res, next) {
         limit: pageSize,
         subQuery: false,
         offset: offset,
-        attributes: ["subjectCode", "courseNumber", "title", "instructor"]
+        attributes: ["subjectCode", "courseNumber", "title", "instructorId"]
       })
   
       if (students.length === 0) {
