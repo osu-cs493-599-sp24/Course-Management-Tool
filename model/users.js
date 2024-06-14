@@ -38,19 +38,24 @@ const User = sequelize.define("User", {
     set(value) {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(value, salt);
+      console.log('Hashed password during user creation:', hash); // Debug log
       this.setDataValue('password', hash);
     },
   }
 });
 
+User.findByEmail = async function (email) {
+  return await User.findOne({ where: { email } });
+};
 
-// User.hasMany(Submissions, { foreignKey: { allowNull: false } });
-// User.hasMany(Enrollments, { foreignKey: { allowNull: false } });
+User.prototype.verifyPassword = function (password) {
+  const isMatch = bcrypt.compareSync(password, this.password);
+  console.log('Comparing passwords:', password, this.password, isMatch); // Debug log
+  return isMatch;
+};
 
-exports.User = User; // Correcting the export to User
-
+exports.User = User;
 exports.userFields = [
-  // Exporting the user fields for potential external use
   "userID",
   "firstName",
   "lastName",

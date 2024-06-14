@@ -39,7 +39,7 @@ Courses.belongsToMany(User, {
     name: "courseId",
     allowNull: false,
   },
-});
+})
 
 User.hasMany(Courses, {
   foreignKey: {
