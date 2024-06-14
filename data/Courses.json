@@ -1,8 +1,57 @@
 [
     {
-        "subjectCode": 2556,
-        "courseNumber": 25561,
-        "title": "number 1 class",
-        "instructor": "David Day"
+        "subjectCode": "MTH",
+        "courseNumber": 100,
+        "title": "Intro Math",
+        "instructorId": 1
+    },
+    {
+        "subjectCode": "MTH",
+        "courseNumber": 200,
+        "title": "Advanced Math",
+        "instructorId": 1
+    },
+    {
+        "subjectCode": "BIO",
+        "courseNumber": 100,
+        "title": "Basic Bilogy",
+        "instructorId": 2
+    },
+    {
+        "subjectCode": "HTH",
+        "courseNumber": 100,
+        "title": "Health Principles",
+        "instructorId": 3
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 100,
+        "title": "Business Ethics 101",
+        "instructorId": 4
+    },
+    {
+        "subjectCode": "BSN",
+        "courseNumber": 110,
+        "title": "Digital Marketing Essentials",
+        "instructorId": 1
+    },
+    {
+        "subjectCode": "ART",
+        "courseNumber": 120,
+        "title": "Modern Art Movements",
+        "instructorId": 2
+    },
+    {
+        "subjectCode": "HST",
+        "courseNumber": 100,
+        "title": "World History Overview",
+        "instructorId": 3
+    },
+    {
+        "subjectCode": "CS",
+        "courseNumber": 100,
+        "title": "Computer Science Fundamentals",
+        "instructorId": 4
     }
+
 ]
