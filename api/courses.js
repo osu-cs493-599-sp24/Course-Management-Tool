@@ -168,7 +168,7 @@ router.get('/:id/roster', async function (req, res) {
         limit: pageSize,
         subQuery: false,
         offset: offset,
-        attributes: ["subjectCode", "courseNumber", "title", "instructor"]
+        attributes: ["subjectCode", "courseNumber", "title", "instructorId"]
     })
     // res.status(200).send({ class: result })
 
