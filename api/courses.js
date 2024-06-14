@@ -6,6 +6,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const courses = require('../data/Courses.json')
 const { Courses, CoursesFields} = require('../model/courses')
 const { Assignments } = require('../model/assignments')
+const { Enrollments } = require('../model/enrollments')
 const { User } = require('../model/users')
 
 exports.router = router
@@ -24,6 +25,42 @@ router.post('/', async function (req, res, next) {
         
     }
 })
+
+router.post('/:id/students', async (req, res) => {
+    const courseId = parseInt(req.params.id);
+    const { add, remove } = req.body;
+  
+    try {
+      const course = await Courses.findByPk(courseId);
+      if (!course) {
+        return res.status(404).json({ error: 'Course not found' });
+      }
+  
+      if (add && add.length > 0) {
+        await Enrollments.bulkCreate(
+          add.map(userId => ({
+            userId,
+            courseId
+          })),
+          { ignoreDuplicates: true }
+        );
+      }
+  
+      if (remove && remove.length > 0) {
+        await Enrollments.destroy({
+          where: {
+            courseId,
+            userId: remove
+          }
+        });
+      }
+  
+      res.status(200).json({ message: 'Enrollment updated successfully' });
+    } catch (error) {
+      console.error('Failed to update enrollments:', error);
+      res.status(500).json({ error: 'Failed to update enrollments' });
+    }
+});
 
 router.get('/', async function (req, res, next) {
     let page = parseInt(req.query.page) || 1;
@@ -197,10 +234,10 @@ router.get('/:courseId/assignments', async function (req, res, next) {
   module.exports = router;
 
   // endpoint to update a course
-  router.patch('/:courseID', async function (req, res, next) {
+router.patch('/:courseID', async function (req, res, next) {
     const courseId = req.params.courseID
     try {
-    const result = await Courses.update(req.body, {
+        const result = await Courses.update(req.body, {
         where: { courseID: courseId },
         fields: CoursesFields
     })
@@ -212,5 +249,14 @@ router.get('/:courseId/assignments', async function (req, res, next) {
     } catch (e) {
     next(e)
     }
-    
+})
+
+router.delete('/:courseId', async function (req, res, next) {
+    const courseId = req.params.courseId
+    const result = await Courses.destroy({ where: { courseID: courseId }})
+    if (result > 0) {
+        res.status(204).send()
+    } else {
+        next()
+    }
 })
