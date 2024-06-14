@@ -33,25 +33,25 @@
         "subjectCode": "BSN",
         "courseNumber": 110,
         "title": "Digital Marketing Essentials",
-        "instructorId": 5
+        "instructorId": 1
     },
     {
         "subjectCode": "ART",
         "courseNumber": 120,
         "title": "Modern Art Movements",
-        "instructorId": 6
+        "instructorId": 2
     },
     {
         "subjectCode": "HST",
         "courseNumber": 100,
         "title": "World History Overview",
-        "instructorId": 6
+        "instructorId": 3
     },
     {
         "subjectCode": "CS",
         "courseNumber": 100,
         "title": "Computer Science Fundamentals",
-        "instructorId": 8
+        "instructorId": 4
     }
 
 ]

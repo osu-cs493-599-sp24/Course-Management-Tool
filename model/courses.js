@@ -4,7 +4,7 @@ const { Assignments } = require("./assignments");
 const { Enrollments } = require("./enrollments");
 const Courses = sequelize.define("Courses", {
   // Use PascalCase for model names
-  courseID: {
+  courseId: {
     type: DataTypes.INTEGER,
     primaryKey: true, // Assuming courseID is a primary key
     autoIncrement: true,
@@ -35,7 +35,7 @@ exports.Courses = Courses;
 
 exports.CoursesFields = [
   // Renaming for better clarity and grammar
-  "courseID",
+  "courseId",
   "subjectCode",
   "courseNumber",
   "title",
