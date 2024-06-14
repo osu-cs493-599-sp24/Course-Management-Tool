@@ -8,11 +8,12 @@ const { Courses, CoursesFields} = require('../model/courses')
 const { Assignments } = require('../model/assignments')
 const { Enrollments } = require('../model/enrollments')
 const { User } = require('../model/users')
+const auth  = require('../lib/auth')
 
 exports.router = router
 exports.courses = courses
 
-router.post('/', async function (req, res, next) {
+router.post('/', auth.requireAuthentication, auth.requireAdmin,  async function (req, res, next) {
     try {
         const course = await Courses.create(req.body, CoursesFields)
         res.status(201).send({ id: course.courseId })
@@ -25,6 +26,7 @@ router.post('/', async function (req, res, next) {
         
     }
 })
+
 
 router.post('/:id/students', async (req, res) => {
     const courseId = parseInt(req.params.id);
@@ -113,7 +115,7 @@ router.get('/:courseId', async function (req, res, next) {
 });
 
 //get student that enroll in that course
-router.get("/:courseId/students", async function (req, res, next) {
+router.get("/:courseId/students", auth.requireAuthentication, async function (req, res, next) {
     try {
       const courseId = parseInt(req.params.courseId); // Ensure courseId is a number
 
@@ -125,6 +127,19 @@ router.get("/:courseId/students", async function (req, res, next) {
       if (isNaN(courseId)) {
         return res.status(400).send({ error: "Invalid course ID" });
       }
+
+      // Fetch the course to check instructorId
+      const course = await Courses.findByPk(courseId);
+
+      if (!course) {
+          return res.status(404).send({ error: "Course not found" });
+      }
+
+      // Check if the user is admin or the instructor of the course
+      if (req.role !== 'admin' && req.user !== course.instructorId) {
+          return res.status(403).json({ error: 'Admin or Instructor permissions required' });
+      }
+      
   
       const students = await Courses.findByPk(courseId, {
         include: [{ 
@@ -234,24 +249,46 @@ router.get('/:courseId/assignments', async function (req, res, next) {
   module.exports = router;
 
   // endpoint to update a course
-router.patch('/:courseId', async function (req, res, next) {
+router.patch('/:courseId', auth.requireAuthentication, async function (req, res, next) {
     const courseId = req.params.courseId
+    const updates = req.body;
     try {
-        const result = await Courses.update(req.body, {
-        where: { courseId: courseId },
-        fields: CoursesFields
-    })
-    if (result[0] > 0) {
-        res.status(204).send()
-    } else {
-        next()
-    }
-    } catch (e) {
-    next(e)
-    }
-})
+        // Find the course to check ownership or admin rights
+        const course = await Courses.findByPk(courseId);
 
-router.delete('/:courseId', async function (req, res, next) {
+        if (!course) {
+          // console.log("course not found");
+            return res.status(404).json({ error: 'Course not found' });
+        }
+        // console.log("course.instructorId",course.instructorId, req.user);
+
+        // Check if the user is admin or the instructor of the course
+        if (req.role !== 'admin' && req.user !== course.instructorId) {
+          console.log("You are not aadmin");
+            return res.status(403).json({ error: 'Admin or Instructor permissions required' });
+        }
+
+        // Perform the update
+        const [updated] = await Courses.update(updates, {
+            where: { courseId: courseId },
+            fields: ['subjectCode', 'courseNumber', 'title', 'instructorId']
+        });
+
+        if (updated) {
+            res.status(200).send({ message: 'Course updated successfully' });
+        } else {
+            res.status(400).send({ error: 'No fields were updated' });
+        }
+    } catch (e) {
+        if (e instanceof ValidationError) {
+            res.status(400).send({ error: e.message });
+        } else {
+            next(e);
+        }
+    }
+});
+
+router.delete('/:courseId', auth.requireAuthentication, auth.requireAdmin, async function (req, res, next) {
     const courseId = req.params.courseId
     const result = await Courses.destroy({ where: { courseId: courseId }})
     if (result > 0) {
