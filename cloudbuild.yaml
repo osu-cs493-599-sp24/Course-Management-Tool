@@ -7,24 +7,17 @@ steps:
     gcloud config set project $PROJECT_ID
     gcloud config set compute/zone us-central1-a
     gcloud config set container/cluster my-cluster
+    # Verify cluster credentials retrieval (optional)
     gcloud container clusters get-credentials my-cluster --zone us-central1-a --project $PROJECT_ID
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs']
 - name: 'gcr.io/cloud-builders/kubectl'
-  env:
-  - name: CLOUDSDK_COMPUTE_ZONE
-    value: us-central1-a
-  - name: CLOUDSDK_CONTAINER_CLUSTER
-    value: my-cluster
+  env:  # Removed environment variables from here
   args: ['apply', '-f', 'mysql-deployment.yml']
 - name: 'gcr.io/cloud-builders/kubectl'
-  env:
-  - name: CLOUDSDK_COMPUTE_ZONE
-    value: us-central1-a
-  - name: CLOUDSDK_CONTAINER_CLUSTER
-    value: my-cluster
+  env:  # Removed environment variables from here
   args: ['apply', '-f', 'nodejs-deployment.yml']
 images:
 - 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs'
