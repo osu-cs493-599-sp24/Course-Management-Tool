@@ -16,6 +16,12 @@ steps:
   args: ['apply', '-f', 'mysql-deployment.yml']
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'nodejs-deployment.yml']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+    - 'set'
+    - 'image'
+    - 'deployment/nodejs'
+    - 'nodejs=gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs:latest'
 images:
 - 'gcr.io/$PROJECT_ID/final-project-team-eightteen-nodejs'
 options:
