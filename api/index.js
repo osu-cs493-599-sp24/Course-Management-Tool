@@ -19,6 +19,6 @@ const router = Router();
 router.use("/assignments", assignmentsRouter);
 router.use("/courses", coursesRouter);
 router.use("/users", usersRouter);
-router.use("/submission", submissionRouter);
+router.use("/submissions", submissionRouter);
 
 module.exports = router;
