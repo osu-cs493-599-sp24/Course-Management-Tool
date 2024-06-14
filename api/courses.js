@@ -15,7 +15,7 @@ exports.courses = courses
 router.post('/', async function (req, res, next) {
     try {
         const course = await Courses.create(req.body, CoursesFields)
-        res.status(201).send({ id: course.courseID })
+        res.status(201).send({ id: course.courseId })
     } catch(e) {
         if (e instanceof ValidationError) {
             res.status(400).send({ error: e.message })
@@ -234,11 +234,11 @@ router.get('/:courseId/assignments', async function (req, res, next) {
   module.exports = router;
 
   // endpoint to update a course
-router.patch('/:courseID', async function (req, res, next) {
-    const courseId = req.params.courseID
+router.patch('/:courseId', async function (req, res, next) {
+    const courseId = req.params.courseId
     try {
         const result = await Courses.update(req.body, {
-        where: { courseID: courseId },
+        where: { courseId: courseId },
         fields: CoursesFields
     })
     if (result[0] > 0) {
@@ -253,7 +253,7 @@ router.patch('/:courseID', async function (req, res, next) {
 
 router.delete('/:courseId', async function (req, res, next) {
     const courseId = req.params.courseId
-    const result = await Courses.destroy({ where: { courseID: courseId }})
+    const result = await Courses.destroy({ where: { courseId: courseId }})
     if (result > 0) {
         res.status(204).send()
     } else {
