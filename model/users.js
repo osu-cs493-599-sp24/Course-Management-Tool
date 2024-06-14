@@ -49,6 +49,9 @@ User.findByEmail = async function (email) {
 };
 
 User.prototype.verifyPassword = function (password) {
+  console.log(typeof(password))
+  console.log(typeof(this.password))
+
   const isMatch = bcrypt.compareSync(password, this.password);
   console.log('Comparing passwords:', password, this.password, isMatch); // Debug log
   return isMatch;
