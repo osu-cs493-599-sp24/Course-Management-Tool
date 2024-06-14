@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "myswagger"
+    ports:
+      - "8080:8080"
+    volumes:
+      - /Users/admin/Documents/CS599-Cloud application dev/final-project-team-eightteen/openapi.yaml:/api.yaml
+    environment:
+      SWAGGER_JSON: /api.yaml
+
   mysql:
     image: mysql:5.7
     container_name: mysql-server
