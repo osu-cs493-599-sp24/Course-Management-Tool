@@ -47,13 +47,3 @@ User.hasMany(Courses, {
     allowNull: false,
   },
 });
-
-User.hasMany(Enrollments,
-   { 
-    as: 'UserEnrollments', 
-   foreignKey: 'userId' });
-
-  Enrollments.belongsTo(User, { foreignKey: 'userId' });
-
-Enrollments.belongsTo(User, { foreignKey: 'userId' });
-Enrollments.belongsTo(Courses, { foreignKey: 'courseId' }); // Define association to Course
