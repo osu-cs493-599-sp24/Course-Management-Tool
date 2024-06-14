@@ -26,6 +26,7 @@ router.post('/', async function (req, res, next) {
     }
 })
 
+
 router.post('/:id/students', async (req, res) => {
     const courseId = parseInt(req.params.id);
     const { add, remove } = req.body;
