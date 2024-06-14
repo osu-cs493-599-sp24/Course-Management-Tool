@@ -1,11 +1,8 @@
 const { Router, response } = require("express");
 const { Courses } = require("../model/courses");
 const { User, userFields } = require("../model/users");
-const { Enrollments } = require("../model/enrollments");
-// const { Enrollments } = require('../model/relationship'); // Import the relationships
 const auth = require("../lib/auth"); // Import the auth module
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const router = Router();
 /*
  * Route to list all of a user's businesses.
@@ -83,11 +80,19 @@ router.post("/login", async function (req, res) {
   }
 });
 
-
-
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", auth.requireAuthentication, async function (req, res, next) {
   try {
     const { id } = req.params;
+    const userId = parseInt(id); // Ensure id is a number
+
+    console.log("id", userId, req.user);
+
+    // Ensure the authenticated user matches the requested user ID
+    if (req.user !== userId && req.role !== 'admin') {
+      return res.status(403).json({ error: 'Access forbidden: You can only access your own data unless you are an admin.' });
+    }
+
+
     const user = await User.findByPk(id, {
       include: [
         {
