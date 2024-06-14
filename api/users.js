@@ -1,11 +1,8 @@
 const { Router, response } = require("express");
 const { Courses } = require("../model/courses");
 const { User, userFields } = require("../model/users");
-const { Enrollments } = require("../model/enrollments");
-// const { Enrollments } = require('../model/relationship'); // Import the relationships
 const auth = require("../lib/auth"); // Import the auth module
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const router = Router();
 /*
  * Route to list all of a user's businesses.
@@ -83,121 +80,19 @@ router.post("/login", async function (req, res) {
   }
 });
 
-// router.get("/:id", async function (req, res, next) {
-//   const userId = parseInt(req.params.id); // Extract user ID from request parameters
-
-//   try {
-//     // Retrieve user data from the database, including associated Courses
-//     const user = await User.findByPk(userId, {
-//       include: [
-//         {
-//           model: Courses,
-//           attributes: ['courseId', 'subjectCode', 'courseNumber', 'title'], // Include specific course fields
-//         }
-//       ],
-//     });
-
-//     // If user is not found, return 404 Not Found
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-
-//     // Construct the basic response object with essential user fields
-//     const response = {
-//       userID: user.userID,
-//       firstName: user.firstName,
-//       lastName: user.lastName,
-//       username: user.username,
-//       role: user.role,
-//       email: user.email,
-//       createdAt: user.createdAt,
-//       updatedAt: user.updatedAt,
-//       courses: user.Courses.map(course => ({
-//         courseId: course.courseId,
-//         subjectCode: course.subjectCode,
-//         courseNumber: course.courseNumber,
-//         title: course.title,
-//       })),
-//     };
-
-//     // If user is an instructor, add teachingCourseIds to the response
-//     if (user.role === 'instructor') {
-//       response.teachingCourseIds = user.Courses.map(course => course.courseId);
-//     }
-
-//     // If user is a student, add enrolledCourseIds to the response
-//     if (user.role === 'student') {
-//       response.enrolledCourseIds = user.Enrollments.map(enrollment => enrollment.courseId);
-//     }
-
-//     // Return the constructed response with appropriate status code
-//     res.status(200).json(response);
-
-//   } catch (error) {
-//     console.error('Error fetching user data:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
-
-// router.get("/:id", async function (req, res, next) {
-//   const userId = parseInt(req.params.id); // Extract user ID from request parameters
-
-//   try {
-//     const user = await User.findByPk(userId, {
-//       include: [
-//         {
-//           model: Enrollments,
-//           as: "UserEnrollments",
-//           attributes: ["enrollmentID", "courseId"],
-//           include: {
-//             model: Courses,
-//             attributes: ["courseId", "subjectCode", "courseNumber", "title"],
-//           },
-//         },
-//       ],
-//     });
-
-//     if (!user) {
-//       return res.status(404).json({ error: "User not found" });
-//     }
-
-//     let enrollments = [];
-//     if (user.UserEnrollments && user.UserEnrollments.length > 0) {
-//       console.log("Enrollments", user.UserEnrollments);
-//       enrollments = user.UserEnrollments.map((enrollment) => ({
-//         enrollmentID: enrollment.enrollmentID,
-//         courseId: enrollment.courseId,
-//         course: {
-//           courseId: enrollment.Course.courseId,
-//           subjectCode: enrollment.Course.subjectCode,
-//           courseNumber: enrollment.Course.courseNumber,
-//           title: enrollment.Course.title,
-//         },
-//       }));
-//     }
-
-//     const response = {
-//       userID: user.userID,
-//       firstName: user.firstName,
-//       lastName: user.lastName,
-//       username: user.username,
-//       role: user.role,
-//       email: user.email,
-//       createdAt: user.createdAt,
-//       updatedAt: user.updatedAt,
-//       enrollments: enrollments,
-//     };
-
-//     res.status(200).json(response);
-//   } catch (error) {
-//     console.error("Error fetching user data:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", auth.requireAuthentication, async function (req, res, next) {
   try {
     const { id } = req.params;
+    const userId = parseInt(id); // Ensure id is a number
+
+    console.log("id", userId, req.user);
+
+    // Ensure the authenticated user matches the requested user ID
+    if (req.user !== userId && req.role !== 'admin') {
+      return res.status(403).json({ error: 'Access forbidden: You can only access your own data unless you are an admin.' });
+    }
+
+
     const user = await User.findByPk(id, {
       include: [
         {
