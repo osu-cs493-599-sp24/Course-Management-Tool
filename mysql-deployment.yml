@@ -1,40 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: postgres
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: postgres
   replicas: 1
   template:
     metadata:
       labels:
-        app: mysql
+        app: postgres
     spec:
       containers:
-      - name: mysql
-        image: mysql:5.7
+      - name: postgres
+        image: postgres:latest
         env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "yes"
-        - name: MYSQL_DATABASE
-          value: "finalproject"
-        - name: MYSQL_USER
-          value: "finalproject"
-        - name: MYSQL_PASSWORD
-          value: "hunter2"
+        - name: POSTGRES_DB
+          value: "tarpaulin"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "test"
         ports:
-        - containerPort: 3306
+        - containerPort: 5432
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: postgres
 spec:
   type: ClusterIP
   ports:
-  - port: 3306
-    targetPort: 3306
+  - port: 5432
+    targetPort: 5432
   selector:
-    app: mysql
+    app: postgres

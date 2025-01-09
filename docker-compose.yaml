@@ -7,39 +7,49 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /Users/admin/Documents/CS599-Cloud application dev/final-project-team-eightteen/openapi.yaml:/api.yaml
+      - ./openapi.yaml:/api.yaml
     environment:
       SWAGGER_JSON: /api.yaml
 
-  mysql:
-    image: mysql:5.7
-    container_name: mysql-server
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
     networks:
-      - mysql-net
+      - app-network
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: "finalproject"
-      MYSQL_USER: "finalproject"
-      MYSQL_PASSWORD: "hunter2"
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   
   nodejs:
     build: .
     container_name: nodejs-app
     networks:
-      - mysql-net
+      - app-network
     ports:
       - "8000:8000"
     depends_on:
-      - mysql
+      postgres:
+        condition: service_healthy
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USER: finalproject
-      DB_PASSWORD: hunter2
-      DB_NAME: finalproject
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
 
 networks:
-  mysql-net:
+  app-network:
     driver: bridge
+
+volumes:
+  postgres_data:

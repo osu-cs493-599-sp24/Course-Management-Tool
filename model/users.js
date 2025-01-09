@@ -1,69 +1,43 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../lib/sequelize");
-const { Enrollments } = require("./enrollments");
-const { Submissions } = require("./submissions");
+// model/users.js
+const { DataTypes } = require('sequelize');
+const sequelize = require('../lib/sequelize');
 const bcrypt = require('bcryptjs');
 
 const User = sequelize.define("User", {
-  // Conventionally use PascalCase for model names
   userID: {
     type: DataTypes.INTEGER,
-    primaryKey: true, // Assuming userID is the primary key
-    autoIncrement: true, // If userID should auto-increment
-    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    field: 'user_id'
   },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'first_name'
   },
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  role: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    field: 'last_name'
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  role: {
+    type: DataTypes.ENUM('admin', 'instructor', 'student'),
     allowNull: false,
-    set(value) {
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(value, salt);
-      console.log('Hashed password during user creation:', hash); // Debug log
-      this.setDataValue('password', hash);
-    },
+    defaultValue: 'student'
   }
+}, {
+  tableName: 'users',
+  underscored: true
 });
-
-User.findByEmail = async function (email) {
-  return await User.findOne({ where: { email } });
-};
-
-User.prototype.verifyPassword = function (password) {
-  console.log(typeof(password))
-  console.log(typeof(this.password))
-
-  const isMatch = bcrypt.compareSync(password, this.password);
-  console.log('Comparing passwords:', password, this.password, isMatch); // Debug log
-  return isMatch;
-};
-
-exports.User = User;
-exports.userFields = [
-  "userID",
-  "firstName",
-  "lastName",
-  "username",
-  "role",
-  "email",
-  "password",
-];
