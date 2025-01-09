@@ -105,23 +105,9 @@ The API endpoints are defined in the OpenAPI specification (openapi.yaml) and ca
 
 ### Google Cloud Platform
 
-1. **Deploy using Google Cloud Run:**
-   - Build and push the Docker image to Google Container Registry:
-     ```sh
-     docker build -t gcr.io/team-18-2456/tarpaulin-api:latest .
-     ```
-   - Deploy the image to Cloud Run:
-     ```sh
-     gcloud run deploy tarpaulin-api --image gcr.io/team-18-2456/tarpaulin-api --platform managed --region us-central1
-     ```
+ Deployment has been streamlined using the GCP codebuild pipeline. The pipeline will run on each new push
 
-2. **Deploy using Google Kubernetes Engine (GKE):**
-   - Create a cluster:
-     ```sh
-     gcloud container clusters create tarpaulin-cluster --num-nodes=3
-     ```
-   - Deploy the application:
-     ```sh
-     kubectl apply -f k8s-deployment.yaml
-     ```
+ On each successful push, the pipeline will build a new docker image and it will push the image to GCR. Later, the image will be deployed on Kubernetes cluster which is hosted on GKE. 
+
+ 
 
