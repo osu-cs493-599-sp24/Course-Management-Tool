@@ -10,9 +10,6 @@ Tarpaulin is a course management tool that involves developing a complete RESTfu
 - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
 - [Deployment](#deployment)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
