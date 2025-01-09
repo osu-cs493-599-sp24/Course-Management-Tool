@@ -125,7 +125,3 @@ The API endpoints are defined in the OpenAPI specification (openapi.yaml) and ca
      kubectl apply -f k8s-deployment.yaml
      ```
 
-
-To run the project, run the command below from the root folder.
-
-./Run.sh
